@@ -89,10 +89,9 @@ li {
 .experience {
   width: 100%;
   background-color: #f6f6f6;
-  padding: 15px;
+  padding: 0px 15px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
 .summary {
