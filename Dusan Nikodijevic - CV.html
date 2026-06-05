@@ -30,7 +30,7 @@
       font-family: 'Inter', sans-serif;
       color: var(--text-main);
       background-color: var(--bg-body);
-      line-height: 1.6; /* Blago povećan razmak radi bolje čitljivosti */
+      line-height: 1.6;
       padding: 40px 20px;
     }
 
@@ -51,14 +51,18 @@
       break-inside: avoid;
     }
 
+    .header__avatar-wrapper {
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
     .header__avatar {
       width: 100px;
       height: 100px;
-      object-fit: contain;
-      margin-bottom: 15px;
+      display: block;
+      object-fit: cover; /* Promenjeno u cover radi boljeg ispunjavanja kruga slike */
     }
 
-    /* Rešava problem dupliranja imena u print layoutu */
     .header__name {
       font-size: 26px;
       font-weight: 600;
@@ -135,7 +139,7 @@
       margin-bottom: 20px;
       background-color: var(--bg-card);
       page-break-inside: avoid;
-      break-inside: avoid; /* Sprečava da sivi okvir bude rasečen */
+      break-inside: avoid;
     }
 
     .card__header {
@@ -202,7 +206,7 @@
       margin-bottom: 30px;
       padding-left: 4px;
       page-break-inside: avoid;
-      break-inside: avoid; /* Sprečava da pojedinačni projekat pukne na pola */
+      break-inside: avoid;
     }
 
     .info-block__title {
@@ -286,7 +290,7 @@
     /* PRINT & EXPORT OPTIMIZACIJA */
     @media print {
       @page {
-        margin: 15mm 15mm 15mm 15mm; /* Optimizovane ivice stranice za PDF */
+        margin: 15mm 15mm 15mm 15mm;
       }
       :root {
         --primary-color: #1e5da6;
@@ -313,9 +317,10 @@
         margin-bottom: 15px;
         padding: 15px;
       }
-      /* Sakriva alt tekst profilne slike da ne bi pravio dupli naslov imena na štampi */
-      img[alt="Dušan Nikodijević"] {
-        font-size: 0;
+      /* Popravljeno: neutralisanje isključivo tekstualnog eha, slika ostaje vidljiva */
+      .header__avatar {
+        display: inline-block !important;
+        visibility: visible !important;
       }
     }
   </style>
@@ -324,9 +329,10 @@
 
   <div class="cv-container">
     
-    <!-- HEADER -->
     <header class="header">
-      <img src="profile-picture.jpg" alt="Dušan Nikodijević" class="header__avatar">
+      <div class="header__avatar-wrapper">
+        <img src="profile-picture.jpg" alt="Profile Picture" class="header__avatar">
+      </div>
       <h1 class="header__name">Dušan Nikodijević</h1>
       <div class="header__title">Senior Frontend Developer</div>
       <div class="header__contact">
@@ -342,11 +348,9 @@
       </p>
     </header>
 
-    <!-- EXPERIENCE SECTION -->
     <section class="section">
       <h2 class="section__title">Professional Experience</h2>
 
-      <!-- Card 1: ESL Serbia -->
       <div class="card">
         <div class="card__header">
           <h3 class="card__title">Solution Programmer</h3>
@@ -371,7 +375,6 @@
         </div>
       </div>
 
-      <!-- Card 2: Quest Software -->
       <div class="card">
         <div class="card__header">
           <h3 class="card__title">Software Engineer</h3>
@@ -383,7 +386,6 @@
         </ul>
       </div>
 
-      <!-- Card 3: PDT Belgrade -->
       <div class="card">
         <div class="card__header">
           <h3 class="card__title">Angular Developer</h3>
@@ -395,7 +397,6 @@
         </ul>
       </div>
 
-      <!-- Card 4: Engineers London -->
       <div class="card">
         <div class="card__header">
           <h3 class="card__title">Angular Developer</h3>
@@ -406,7 +407,6 @@
         </ul>
       </div>
 
-      <!-- Card 5: Juratech Systems -->
       <div class="card">
         <div class="card__header">
           <h3 class="card__title">Web Developer - Internship</h3>
@@ -418,7 +418,6 @@
       </div>
     </section>
 
-    <!-- EDUCATION SECTION -->
     <section class="section">
       <h2 class="section__title">Education</h2>
       <div class="info-block">
@@ -427,7 +426,6 @@
       </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section class="section">
       <h2 class="section__title">Projects</h2>
       
@@ -505,7 +503,6 @@
       </div>
     </section>
 
-    <!-- SKILLS SECTION -->
     <section class="section">
       <h2 class="section__title">Skills & Tooling</h2>
       <div class="skills-container">
@@ -533,7 +530,6 @@
       </div>
     </section>
 
-    <!-- LANGUAGES SECTION -->
     <section class="section">
       <h2 class="section__title">Languages</h2>
       <ul class="plain-list">
