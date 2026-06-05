@@ -30,7 +30,7 @@
       font-family: 'Inter', sans-serif;
       color: var(--text-main);
       background-color: var(--bg-body);
-      line-height: 1.5;
+      line-height: 1.6; /* Blago povećan razmak radi bolje čitljivosti */
       padding: 40px 20px;
     }
 
@@ -47,7 +47,8 @@
     .header {
       text-align: center;
       margin-bottom: 30px;
-      break-inside: avoid; /* Sprečava presecanje zaglavlja */
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .header__avatar {
@@ -57,6 +58,7 @@
       margin-bottom: 15px;
     }
 
+    /* Rešava problem dupliranja imena u print layoutu */
     .header__name {
       font-size: 26px;
       font-weight: 600;
@@ -110,7 +112,7 @@
 
     /* Section Styling */
     .section {
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
     .section__title {
@@ -121,17 +123,19 @@
       padding-bottom: 4px;
       display: inline-block;
       margin-bottom: 20px;
-      break-after: avoid; /* Naslov sekcije nikada neće ostati sam na dnu stranice */
+      page-break-after: avoid;
+      break-after: avoid;
     }
 
-    /* Job & Project Cards (Thin Border Boxes) */
+    /* Job & Project Cards */
     .card {
       border: 1px solid var(--border-color);
       border-radius: 6px;
       padding: 20px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       background-color: var(--bg-card);
-      break-inside: avoid; /* KLJUČNO: Cela kartica posla prelazi na sledeću stranu ako nema mesta */
+      page-break-inside: avoid;
+      break-inside: avoid; /* Sprečava da sivi okvir bude rasečen */
     }
 
     .card__header {
@@ -150,10 +154,11 @@
       color: var(--text-light);
     }
 
-    /* Phase Subsections inside Solution Programmer */
     .phase {
       margin-top: 15px;
       margin-bottom: 10px;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .phase__title {
@@ -176,7 +181,7 @@
       color: var(--text-muted);
       position: relative;
       padding-left: 15px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       text-align: justify;
     }
 
@@ -192,11 +197,12 @@
       color: var(--text-main);
     }
 
-    /* Simple Info Block (Education / Projects / Languages) */
+    /* Info Block (Education / Projects) */
     .info-block {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       padding-left: 4px;
-      break-inside: avoid; /* KLJUČNO: Pojedinačni projekat nikada neće biti presečen napola */
+      page-break-inside: avoid;
+      break-inside: avoid; /* Sprečava da pojedinačni projekat pukne na pola */
     }
 
     .info-block__title {
@@ -209,18 +215,18 @@
     .info-block__sub {
       font-size: 13px;
       color: var(--text-light);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     
     .info-block__description {
       font-size: 13px;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 6px;
       text-align: justify;
     }
 
     .info-block__bullets {
-      margin-top: 6px;
+      margin-top: 8px;
       list-style-type: square;
       padding-left: 20px;
     }
@@ -228,7 +234,7 @@
     .info-block__bullet-item {
       font-size: 12.5px;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       text-align: justify;
     }
 
@@ -236,8 +242,9 @@
     .skills-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       padding-left: 4px;
+      page-break-inside: avoid;
       break-inside: avoid;
     }
 
@@ -255,10 +262,10 @@
       color: var(--text-muted);
     }
 
-    /* Plain List (Languages) */
     .plain-list {
       list-style: none;
       padding-left: 15px;
+      page-break-inside: avoid;
       break-inside: avoid;
     }
     
@@ -276,14 +283,17 @@
       color: var(--primary-color);
     }
 
-    /* AUTOMATSKO PREBACIVANJE U SVETLU TEMU PRILIKOM ŠTAMPE ILI EXPORTA U PDF */
+    /* PRINT & EXPORT OPTIMIZACIJA */
     @media print {
+      @page {
+        margin: 15mm 15mm 15mm 15mm; /* Optimizovane ivice stranice za PDF */
+      }
       :root {
         --primary-color: #1e5da6;
         --text-main: #111111;
-        --text-muted: #333333;
-        --text-light: #666666;
-        --border-color: #cccccc;
+        --text-muted: #2d3748;
+        --text-light: #4a5568;
+        --border-color: #cbd5e1;
         --bg-body: #ffffff;
         --bg-container: #ffffff;
         --bg-card: #ffffff;
@@ -300,6 +310,12 @@
       .card {
         border: 1px solid var(--border-color);
         background-color: #ffffff;
+        margin-bottom: 15px;
+        padding: 15px;
+      }
+      /* Sakriva alt tekst profilne slike da ne bi pravio dupli naslov imena na štampi */
+      img[alt="Dušan Nikodijević"] {
+        font-size: 0;
       }
     }
   </style>
@@ -310,7 +326,7 @@
     
     <!-- HEADER -->
     <header class="header">
-      <img src="profile-picture.jpg" alt="Dušan Nikodijević" class="header__avatar">
+      <img src="image_240236.png" alt="Dušan Nikodijević" class="header__avatar">
       <h1 class="header__name">Dušan Nikodijević</h1>
       <div class="header__title">Senior Frontend Developer</div>
       <div class="header__contact">
