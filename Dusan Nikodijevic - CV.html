@@ -47,6 +47,7 @@
     .header {
       text-align: center;
       margin-bottom: 30px;
+      break-inside: avoid; /* Sprečava presecanje zaglavlja */
     }
 
     .header__avatar {
@@ -120,6 +121,7 @@
       padding-bottom: 4px;
       display: inline-block;
       margin-bottom: 20px;
+      break-after: avoid; /* Naslov sekcije nikada neće ostati sam na dnu stranice */
     }
 
     /* Job & Project Cards (Thin Border Boxes) */
@@ -129,6 +131,7 @@
       padding: 20px;
       margin-bottom: 15px;
       background-color: var(--bg-card);
+      break-inside: avoid; /* KLJUČNO: Cela kartica posla prelazi na sledeću stranu ako nema mesta */
     }
 
     .card__header {
@@ -193,6 +196,7 @@
     .info-block {
       margin-bottom: 25px;
       padding-left: 4px;
+      break-inside: avoid; /* KLJUČNO: Pojedinačni projekat nikada neće biti presečen napola */
     }
 
     .info-block__title {
@@ -234,6 +238,7 @@
       flex-direction: column;
       gap: 10px;
       padding-left: 4px;
+      break-inside: avoid;
     }
 
     .skill-row {
@@ -254,6 +259,7 @@
     .plain-list {
       list-style: none;
       padding-left: 15px;
+      break-inside: avoid;
     }
     
     .plain-list li {
@@ -304,7 +310,7 @@
     
     <!-- HEADER -->
     <header class="header">
-      <img src="profile.jpg" alt="Dušan Nikodijević" class="header__avatar">
+      <img src="image_240236.png" alt="Dušan Nikodijević" class="header__avatar">
       <h1 class="header__name">Dušan Nikodijević</h1>
       <div class="header__title">Senior Frontend Developer</div>
       <div class="header__contact">
